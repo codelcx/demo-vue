@@ -70,6 +70,7 @@ export default tsEslint.config(
 
       // stylistic
       '@stylistic/brace-style': ['off', '1tbs', { allowSingleLine: true }],
+      '@stylistic/comma-dangle': ['error', 'always-multiline'],
     },
   },
 

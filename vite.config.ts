@@ -1,10 +1,8 @@
 import { defineConfig, loadEnv } from 'vite'
 import proxy from './vite/proxy'
 import createPlugins from './vite/plugins'
-
-// @ts-ignore
-import { versionInfo } from './scripts/buildInfo.js'
-console.log(versionInfo)
+import buildVersion from './vite/plugins/build-version'
+import { versionInfo, buildInfo } from './scripts/buildInfo'
 
 // https://vite.dev/config/
 export default defineConfig(({ command, mode }) => {
@@ -13,7 +11,10 @@ export default defineConfig(({ command, mode }) => {
   const port = Number(VITE_APP_PROXY_API_PORT) || 3000
 
   return {
-    plugins: createPlugins(env, command === 'build'),
+    define: {
+      __APP_VERSION__: JSON.stringify(buildInfo),
+    },
+    plugins: [...createPlugins(env, command === 'build'), buildVersion(versionInfo)],
     server: { port, proxy },
     resolve: {
       alias: { '@': '/src' },
