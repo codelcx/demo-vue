@@ -4,6 +4,7 @@ import tsEslint from 'typescript-eslint'
 import eslintPluginVue from 'eslint-plugin-vue'
 import stylistic from '@stylistic/eslint-plugin'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
+import cspellConfigs from '@cspell/eslint-plugin/configs'
 import { FlatCompat } from '@eslint/eslintrc'
 
 const compat = new FlatCompat()
@@ -23,6 +24,8 @@ export default tsEslint.config(
 
   /** js推荐配置 */
   eslint.configs.recommended,
+  /** cspell推荐配置 */
+  cspellConfigs.recommended,
   /** ts推荐配置 */
   ...tsEslint.configs.recommended,
   /** vue推荐配置 */
